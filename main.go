@@ -6,7 +6,7 @@ import (
 	"log"
 
 	"github.com/hashicorp/terraform-plugin-framework/providerserver"
-	"github.com/hashicorp/terraform-provider-scaffolding-framework/internal/provider"
+	"github.com/hashicorp/terraform-provider-scaffolding-framework/orion"
 )
 
 // Run "go generate" to format example terraform files and generate the docs for the registry/website
@@ -36,11 +36,12 @@ func main() {
 
 	opts := providerserver.ServeOpts{
 		// TODO: Update this string with the published name of your provider.
-		Address: "registry.terraform.io/hashicorp/scaffolding",
-		Debug:   debug,
+		Address: "upload.academy/dev/solarwinds-orion", // dev address
+		// Address: "registry.terraform.io/uploadacademy/solarwinds-orion",
+		Debug: debug,
 	}
 
-	err := providerserver.Serve(context.Background(), provider.New(version), opts)
+	err := providerserver.Serve(context.Background(), orion.New(version), opts)
 
 	if err != nil {
 		log.Fatal(err.Error())
